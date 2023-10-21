@@ -1,0 +1,66 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using TMPro;
+using UnityEngine.SceneManagement;
+using Photon.Realtime;
+
+public class RoomCreation : MonoBehaviourPunCallbacks
+{
+    public TMP_InputField input;
+    public RoomItem Roomitemprefab;
+    List<RoomItem> RoomItemsList = new List<RoomItem>();
+    public Transform ContentItem;
+
+    public void Start()
+    {
+        PhotonNetwork.JoinLobby();
+    }
+
+
+    public void onclickcreate()
+    {
+        if (input.text.Length >= 1)
+        {
+            PhotonNetwork.CreateRoom(input.text);
+        }
+    }
+
+    public override void OnCreatedRoom()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        Updateroomlist(roomList);
+
+    }
+
+    public void Updateroomlist(List<RoomInfo> list)
+    {
+        foreach (RoomItem item in RoomItemsList)
+        {
+            Destroy(item.gameObject);
+        }
+        RoomItemsList.Clear();
+
+        foreach(RoomInfo Room in list)
+        {
+
+            RoomItem newroom = Instantiate(Roomitemprefab, ContentItem);
+            newroom.setroom(Room.Name);
+            RoomItemsList.Add(newroom);
+
+
+        }
+
+        
+    }
+    public void joinroom(string Roomname)
+    {
+        PhotonNetwork.JoinRoom(Roomname);
+    }
+
+}
