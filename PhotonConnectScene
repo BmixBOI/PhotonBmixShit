@@ -9,6 +9,7 @@ public class PhotonConnectScene : MonoBehaviourPunCallbacks
 {
     public TMP_Text ButtonText;
     public TMP_InputField fe;
+    public string Scene;
 
 
     public void onclickconnected()
@@ -23,7 +24,7 @@ public class PhotonConnectScene : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        SceneManager.LoadScene("JoinSystem");
+        SceneManager.LoadScene(Scene);
 
     }
     
