@@ -12,6 +12,7 @@ public class RoomCreation : MonoBehaviourPunCallbacks
     public RoomItem Roomitemprefab;
     List<RoomItem> RoomItemsList = new List<RoomItem>();
     public Transform ContentItem;
+    public string scenename;
 
     public void Start()
     {
@@ -29,7 +30,7 @@ public class RoomCreation : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(scenename);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
