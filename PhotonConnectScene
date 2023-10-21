@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
+using TMPro;
+
+public class PhotonConnectScene : MonoBehaviourPunCallbacks
+{
+    public TMP_Text ButtonText;
+    public TMP_InputField fe;
+
+
+    public void onclickconnected()
+    {
+        if(fe.text.Length >= 1)
+        {
+            PhotonNetwork.NickName = fe.text;
+            ButtonText.text = "Connecting.";
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        SceneManager.LoadScene("JoinSystem");
+
+    }
+
+    public IEnumerator wait()
+    {
+        yield return new WaitForSeconds(2);
+    }
+    
+}
