@@ -26,10 +26,5 @@ public class PhotonConnectScene : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("JoinSystem");
 
     }
-
-    public IEnumerator wait()
-    {
-        yield return new WaitForSeconds(2);
-    }
     
 }
